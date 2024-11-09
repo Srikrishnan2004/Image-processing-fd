@@ -58,7 +58,7 @@ function Uploader() {
       setImage(imageUrl);
 
       // Call APIs and set the returned images
-      const [histogramRes, dynamicHistogramRes, fusionFrameworkRes] =
+      const [histogramRes,fusionFrameworkRes] =
         await Promise.all([
           callApi(
             "https://image-processing-bd.onrender.com/histogram-equalization/",
