@@ -10,11 +10,11 @@ function Uploader() {
 
   // States for the processed images and loading indicators
   const [histogramImage, setHistogramImage] = useState(null);
-  const [dynamicHistogramImage, setDynamicHistogramImage] = useState(null);
+  // const [dynamicHistogramImage, setDynamicHistogramImage] = useState(null);
   const [fusionFrameworkImage, setFusionFrameworkImage] = useState(null);
 
   const [loadingHistogram, setLoadingHistogram] = useState(false);
-  const [loadingDynamicHistogram, setLoadingDynamicHistogram] = useState(false);
+  // const [loadingDynamicHistogram, setLoadingDynamicHistogram] = useState(false);
   const [loadingFusionFramework, setLoadingFusionFramework] = useState(false);
 
   // Function to handle API requests
@@ -65,11 +65,11 @@ function Uploader() {
             file,
             setLoadingHistogram
           ),
-          callApi(
-            "https://image-processing-bd.onrender.com/dynamic_histogram_equalization/",
-            file,
-            setLoadingDynamicHistogram
-          ),
+          // callApi(
+          //   "https://image-processing-bd.onrender.com/dynamic_histogram_equalization/",
+          //   file,
+          //   setLoadingDynamicHistogram
+          // ),
           callApi(
             "https://image-processing-bd.onrender.com/fusion-framework/",
             file,
@@ -78,7 +78,7 @@ function Uploader() {
         ]);
 
       setHistogramImage(histogramRes);
-      setDynamicHistogramImage(dynamicHistogramRes);
+      // setDynamicHistogramImage(dynamicHistogramRes);
       setFusionFrameworkImage(fusionFrameworkRes);
     }
   };
@@ -100,7 +100,7 @@ function Uploader() {
           )}
           <h4>Histogram Equalization</h4>
         </div>
-        <div className="image">
+        {/* <div className="image">
           {loadingDynamicHistogram ? (
             <Oval color="#00BFFF" height={40} width={40} />
           ) : (
@@ -113,7 +113,7 @@ function Uploader() {
             )
           )}
           <h4>Dynamic Histogram Equalization</h4>
-        </div>
+        </div> */}
         <div className="image">
           {loadingFusionFramework ? (
             <Oval color="#00BFFF" height={40} width={40} />
@@ -156,10 +156,10 @@ function Uploader() {
                 setFileName("No selected Image");
                 setImage(null);
                 setHistogramImage(null);
-                setDynamicHistogramImage(null);
+                // setDynamicHistogramImage(null);
                 setFusionFrameworkImage(null);
                 setLoadingHistogram(false);
-                setLoadingDynamicHistogram(false);
+                // setLoadingDynamicHistogram(false);
                 setLoadingFusionFramework(false);
               }}
             />
