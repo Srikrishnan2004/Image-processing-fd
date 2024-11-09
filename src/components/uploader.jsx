@@ -47,10 +47,10 @@ function Uploader() {
     if (file) {
       // Clear previous results and set loading indicators
       setHistogramImage(null);
-      setDynamicHistogramImage(null);
+      // setDynamicHistogramImage(null);
       setFusionFrameworkImage(null);
       setLoadingHistogram(true);
-      setLoadingDynamicHistogram(true);
+      // setLoadingDynamicHistogram(true);
       setLoadingFusionFramework(true);
 
       setFileName(file.name);
