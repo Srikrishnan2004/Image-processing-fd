@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./uploader.css";
-import { MdCloudUpload, MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { AiFillFileImage } from "react-icons/ai";
-import { Oval } from "react-loader-spinner";
 
 function Uploader() {
   const [image, setImage] = useState(null);
@@ -10,12 +9,20 @@ function Uploader() {
 
   // States for the processed images and loading indicators
   const [histogramImage, setHistogramImage] = useState(null);
-  // const [dynamicHistogramImage, setDynamicHistogramImage] = useState(null);
   const [fusionFrameworkImage, setFusionFrameworkImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // State to display selected processed image
 
   const [loadingHistogram, setLoadingHistogram] = useState(false);
-  // const [loadingDynamicHistogram, setLoadingDynamicHistogram] = useState(false);
   const [loadingFusionFramework, setLoadingFusionFramework] = useState(false);
+
+  useEffect(() => {
+    // Reset state on refresh
+    setImage(null);
+    setFileName("No Selected Image");
+    setHistogramImage(null);
+    setFusionFrameworkImage(null);
+    setSelectedImage(null);
+  }, []);
 
   // Function to handle API requests
   const callApi = async (url, file, setLoadingState) => {
@@ -47,10 +54,9 @@ function Uploader() {
     if (file) {
       // Clear previous results and set loading indicators
       setHistogramImage(null);
-      // setDynamicHistogramImage(null);
       setFusionFrameworkImage(null);
+      setSelectedImage(null); // Clear displayed processed image
       setLoadingHistogram(true);
-      // setLoadingDynamicHistogram(true);
       setLoadingFusionFramework(true);
 
       setFileName(file.name);
@@ -58,95 +64,121 @@ function Uploader() {
       setImage(imageUrl);
 
       // Call APIs and set the returned images
-      const [histogramRes,fusionFrameworkRes] =
-        await Promise.all([
-          callApi(
-            "https://image-processing-bd.onrender.com/histogram-equalization/",
-            file,
-            setLoadingHistogram
-          ),
-          // callApi(
-          //   "https://image-processing-bd.onrender.com/dynamic_histogram_equalization/",
-          //   file,
-          //   setLoadingDynamicHistogram
-          // ),
-          callApi(
-            "https://image-processing-bd.onrender.com/fusion-framework/",
-            file,
-            setLoadingFusionFramework
-          ),
-        ]);
+      const [histogramRes, fusionFrameworkRes] = await Promise.all([
+        callApi(
+          "https://image-processing-bd.onrender.com/histogram-equalization/",
+          file,
+          setLoadingHistogram
+        ),
+        callApi(
+          "https://image-processing-bd.onrender.com/fusion-framework/",
+          file,
+          setLoadingFusionFramework
+        ),
+      ]);
 
       setHistogramImage(histogramRes);
-      // setDynamicHistogramImage(dynamicHistogramRes);
       setFusionFrameworkImage(fusionFrameworkRes);
+    }
+  };
+
+  // Handle drag events
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.add("drag-over");
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove("drag-over");
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove("drag-over");
+
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      handleImageUpload({ target: { files: [file] } });
     }
   };
 
   return (
     <div className="main-component">
+      <h1>Fusion Framework</h1>
       <div className="processed-images">
-        <div className="image">
-          {loadingHistogram ? (
-            <Oval color="#00BFFF" height={40} width={40} />
-          ) : (
-            histogramImage && (
-              <img
-                src={histogramImage}
-                alt="Histogram Equalization Result"
-                width={300}
-              />
-            )
-          )}
-          <h4>Histogram Equalization</h4>
+        <div
+          className="image"
+          onClick={() => {
+            if (!loadingHistogram && histogramImage) {
+              setSelectedImage(histogramImage);
+            }
+          }}
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            src={"Frame 3.svg"}
+            alt="Histogram Equalization"
+          />
         </div>
-        {/* <div className="image">
-          {loadingDynamicHistogram ? (
-            <Oval color="#00BFFF" height={40} width={40} />
-          ) : (
-            dynamicHistogramImage && (
-              <img
-                src={dynamicHistogramImage}
-                alt="Dynamic Histogram Equalization Result"
-                width={300}
-              />
-            )
-          )}
-          <h4>Dynamic Histogram Equalization</h4>
-        </div> */}
-        <div className="image">
-          {loadingFusionFramework ? (
-            <Oval color="#00BFFF" height={40} width={40} />
-          ) : (
-            fusionFrameworkImage && (
-              <img
-                src={fusionFrameworkImage}
-                alt="Fusion Framework Result"
-                width={300}
-              />
-            )
-          )}
-          <h4>Fusion Framework</h4>
+        <div
+          className="image"
+          onClick={() => {
+            if (!loadingFusionFramework && fusionFrameworkImage) {
+              setSelectedImage(fusionFrameworkImage);
+            }
+          }}
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            src={"Group 1.svg"}
+            alt="Fusion Framework"
+          />
         </div>
       </div>
       <main className="MainElement">
-        <form onClick={() => document.querySelector(".input-field").click()}>
-          <input
-            type="file"
-            accept="image/*"
-            className="input-field"
-            hidden
-            onChange={handleImageUpload}
-          />
-          {image ? (
-            <img src={image} width={300} height={300} alt={fileName} />
-          ) : (
-            <>
-              <MdCloudUpload color="#1475ce" size={60} />
-              <p>Browse Images to upload</p>
-            </>
-          )}
-        </form>
+        {selectedImage ? (
+          <div className="displayed-image">
+            <img
+              src={selectedImage}
+              width={300}
+              height={300}
+              alt="Selected Result"
+            />
+          </div>
+        ) : (
+          <form
+            onClick={() => document.querySelector(".input-field").click()}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className="drop-area"
+          >
+            <input
+              type="file"
+              accept="image/*"
+              className="input-field"
+              hidden
+              onChange={handleImageUpload}
+            />
+            {image ? (
+              <img src={image} width={300} height={300} alt={fileName} />
+            ) : (
+              <>
+                <img src={"cloud.svg"} alt="cloud" />
+                <p style={{ fontSize: "22px", fontWeight: "700" }}>
+                  Drag & drop files or Browse
+                </p>
+                <p style={{ fontSize: "14px", fontWeight: "400" }}>
+                  Supported formats: jpg, jpeg, png
+                </p>
+              </>
+            )}
+          </form>
+        )}
         <section className="uploaded-row">
           <AiFillFileImage color="#1475cf" />
           <span className="upload-content">
@@ -156,10 +188,9 @@ function Uploader() {
                 setFileName("No selected Image");
                 setImage(null);
                 setHistogramImage(null);
-                // setDynamicHistogramImage(null);
                 setFusionFrameworkImage(null);
+                setSelectedImage(null); // Clear displayed processed image
                 setLoadingHistogram(false);
-                // setLoadingDynamicHistogram(false);
                 setLoadingFusionFramework(false);
               }}
             />
