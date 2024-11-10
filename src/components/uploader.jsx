@@ -169,10 +169,10 @@ function Uploader() {
             ) : (
               <>
                 <img src={"cloud.svg"} alt="cloud" />
-                <p style={{ fontSize: "22px", fontWeight: "700" }}>
+                <p className="subhead1" style={{ fontWeight: "700" }}>
                   Drag & drop files or Browse
                 </p>
-                <p style={{ fontSize: "14px", fontWeight: "400" }}>
+                <p className="subhead2" style={{ fontWeight: "700" }}>
                   Supported formats: jpg, jpeg, png
                 </p>
               </>

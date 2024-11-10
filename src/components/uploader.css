@@ -55,3 +55,32 @@ h4 {
 p {
   font-family: "Mulish", sans-serif;
 }
+
+.subhead1 {
+  font-size: 22px;
+}
+
+.subhead2 {
+  font-size: 15px;
+}
+
+@media (min-width: 320px) and (max-width: 450px) {
+  .processed-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  form {
+    height: 300px;
+    width: 300px;
+  }
+
+  .subhead1 {
+    font-size: 20px;
+  }
+
+  .subhead2 {
+    font-size: 13px;
+  }
+}
