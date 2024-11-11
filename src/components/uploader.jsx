@@ -108,7 +108,16 @@ function Uploader() {
 
   return (
     <div className="main-component">
-      <h1>Fusion Framework</h1>
+      <h1
+        style={{
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: "900",
+          fontSize: "2rem",
+          color: "#333",
+        }}
+      >
+        Fusion Framework
+      </h1>
       <div className="processed-images">
         <div
           className="image"
