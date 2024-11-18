@@ -6,10 +6,11 @@ form {
   justify-content: center;
   align-items: center;
   border: 2px dashed #8cb2f7;
-  height: 400px;
-  width: 400px;
+  height: 20vh;
+  width: 35vw;
   cursor: pointer;
   border-radius: 5px;
+  padding: 12px;
 }
 
 .uploaded-row {
@@ -64,6 +65,22 @@ p {
   font-size: 15px;
 }
 
+.image-gallery {
+  width: 60vw;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #8cb2f7 transparent;
+}
+
+.sample-image {
+  height: 20vh;
+  width: 10vw;
+}
+
 @media (min-width: 320px) and (max-width: 450px) {
   .processed-images {
     display: flex;
@@ -82,5 +99,10 @@ p {
 
   .subhead2 {
     font-size: 13px;
+  }
+
+  .sample-image {
+    width: 40vw;
+    height: 20vh;
   }
 }

@@ -15,6 +15,16 @@ function Uploader() {
   const [loadingHistogram, setLoadingHistogram] = useState(false);
   const [loadingFusionFramework, setLoadingFusionFramework] = useState(false);
 
+  // Dynamically generate images array
+  const images = Array.from({ length: 20 }, (_, index) => {
+    const number = String(index + 1).padStart(2, "0"); // Ensures numbers like 01, 02, etc.
+    return {
+      id: index + 1,
+      src: `sampleimages/${number}.jpg`,
+      alt: `Image ${number}`,
+    };
+  });
+
   useEffect(() => {
     // Reset state on refresh
     setImage(null);
@@ -148,6 +158,23 @@ function Uploader() {
           />
         </div>
       </div>
+      <h1
+        style={{
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: "900",
+          fontSize: "2rem",
+          color: "#333",
+        }}
+      >
+        Sample Images
+      </h1>
+      <div className="image-gallery">
+        {images.map((image) => (
+          <div key={image.id} className="image-item">
+            <img src={image.src} alt={image.alt} className={"sample-image"} />
+          </div>
+        ))}
+      </div>
       <main className="MainElement">
         {selectedImage ? (
           <div className="displayed-image">
@@ -174,10 +201,14 @@ function Uploader() {
               onChange={handleImageUpload}
             />
             {image ? (
-              <img src={image} width={300} height={300} alt={fileName} />
+              <img src={image} width="150" height="150" alt={fileName} />
             ) : (
               <>
-                <img src={"cloud.svg"} alt="cloud" />
+                <img
+                  src={"cloud.svg"}
+                  alt="cloud"
+                  style={{ height: "7vh", width: "7vw" }}
+                />
                 <p className="subhead1" style={{ fontWeight: "700" }}>
                   Drag & drop files or Browse
                 </p>
