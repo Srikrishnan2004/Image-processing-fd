@@ -6,11 +6,12 @@ form {
   justify-content: center;
   align-items: center;
   border: 2px dashed #8cb2f7;
-  height: 20vh;
-  width: 35vw;
+  height: 40vh;
+  width: 40vw;
   cursor: pointer;
   border-radius: 5px;
-  padding: 12px;
+  padding: 12px 12px 12px 12px;
+  margin-top: 10px;
 }
 
 .uploaded-row {
@@ -33,6 +34,7 @@ form {
   flex-direction: row;
   justify-content: center;
   gap: 30px;
+  padding-bottom: 10px;
 }
 
 .main-component {

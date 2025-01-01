@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./uploader.css";
 import { MdDelete } from "react-icons/md";
 import { AiFillFileImage } from "react-icons/ai";
+import Button from "@mui/material/Button";
+import simpleStore from "../store/simplestore.js";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 function Uploader() {
-  const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState("No Selected Image");
-
-  // States for the processed images and loading indicators
-  const [histogramImage, setHistogramImage] = useState(null);
-  const [fusionFrameworkImage, setFusionFrameworkImage] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // State to display selected processed image
-
-  const [loadingHistogram, setLoadingHistogram] = useState(false);
-  const [loadingFusionFramework, setLoadingFusionFramework] = useState(false);
-
-  // Dynamically generate images array
-  const images = Array.from({ length: 20 }, (_, index) => {
-    const number = String(index + 1).padStart(2, "0"); // Ensures numbers like 01, 02, etc.
-    return {
-      id: index + 1,
-      src: `sampleimages/${number}.jpg`,
-      alt: `Image ${number}`,
-    };
-  });
+  const {
+    image,
+    fileName,
+    histogramImage,
+    fusionFrameworkImage,
+    selectedImage,
+    loadingHistogram,
+    loadingFusionFramework,
+    setOpen,
+    setFileName,
+    setImage,
+    setHistogramImage,
+    setFusionFrameworkImage,
+    setSelectedImage,
+    setLoadingHistogram,
+    setLoadingFusionFramework,
+  } = simpleStore();
 
   useEffect(() => {
     // Reset state on refresh
@@ -32,7 +33,59 @@ function Uploader() {
     setHistogramImage(null);
     setFusionFrameworkImage(null);
     setSelectedImage(null);
-  }, []);
+
+    const startTour = () => {
+      const driverObj = driver({
+        animate: true,
+        showProgress: true,
+        showButtons: ["next", "previous", "close"],
+        steps: [
+          {
+            element: ".drop-area",
+            popover: {
+              title: "Upload Image",
+              description:
+                "Click here to upload an image or drag and drop an image here.",
+              position: "left",
+            },
+          },
+          {
+            element: ".sample-image-shower",
+            popover: {
+              title: "Sample Images",
+              description: "Click here to choose a sample image.",
+              position: "left",
+            },
+          },
+          {
+            element: ".processed-images",
+            popover: {
+              title: "Processed Images",
+              description: "Click on the images to view the processed images",
+              position: "down",
+            },
+          },
+          {
+            popover: {
+              title: "That's it!",
+              description:
+                "You have completed the tour. Click on the 'X' button to close the tour.",
+            },
+          },
+        ],
+      });
+
+      driverObj.drive();
+    };
+
+    startTour();
+  }, [
+    setFileName,
+    setFusionFrameworkImage,
+    setHistogramImage,
+    setImage,
+    setSelectedImage,
+  ]);
 
   // Function to handle API requests
   const callApi = async (url, file, setLoadingState) => {
@@ -76,12 +129,12 @@ function Uploader() {
       // Call APIs and set the returned images
       const [histogramRes, fusionFrameworkRes] = await Promise.all([
         callApi(
-          "https://image-processing-bd-822dd2356f3c.herokuapp.com/histogram-equalization/",
+          "http://localhost:8000/histogram-equalization/",
           file,
           setLoadingHistogram
         ),
         callApi(
-          "https://image-processing-bd-822dd2356f3c.herokuapp.com/fusion-framework/",
+          "http://localhost:8000/fusion-framework/",
           file,
           setLoadingFusionFramework
         ),
@@ -158,23 +211,13 @@ function Uploader() {
           />
         </div>
       </div>
-      <h1
-        style={{
-          fontFamily: "Poppins, sans-serif",
-          fontWeight: "900",
-          fontSize: "2rem",
-          color: "#333",
-        }}
+      <Button
+        variant="outlined"
+        onClick={() => setOpen(true)}
+        className="sample-image-shower"
       >
-        Sample Images
-      </h1>
-      <div className="image-gallery">
-        {images.map((image) => (
-          <div key={image.id} className="image-item">
-            <img src={image.src} alt={image.alt} className={"sample-image"} />
-          </div>
-        ))}
-      </div>
+        Choose an image
+      </Button>
       <main className="MainElement">
         {selectedImage ? (
           <div className="displayed-image">
@@ -201,7 +244,7 @@ function Uploader() {
               onChange={handleImageUpload}
             />
             {image ? (
-              <img src={image} width="150" height="150" alt={fileName} />
+              <img src={image} width="100%" height="100%" alt={fileName} />
             ) : (
               <>
                 <img
