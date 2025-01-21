@@ -129,12 +129,12 @@ function Uploader() {
       // Call APIs and set the returned images
       const [histogramRes, fusionFrameworkRes] = await Promise.all([
         callApi(
-          "http://localhost:8000/histogram-equalization/",
+          "https://image-processing-bd.onrender.com/histogram-equalization/",
           file,
           setLoadingHistogram
         ),
         callApi(
-          "http://localhost:8000/fusion-framework/",
+          "https://image-processing-bd.onrender.com/fusion-framework/",
           file,
           setLoadingFusionFramework
         ),
