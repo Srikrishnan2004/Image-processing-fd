@@ -6,8 +6,8 @@ form {
   justify-content: center;
   align-items: center;
   border: 2px dashed #8cb2f7;
-  height: 40vh;
-  width: 40vw;
+  height: 30vh;
+  width: 30vw;
   cursor: pointer;
   border-radius: 5px;
   padding: 12px 12px 12px 12px;
@@ -15,7 +15,8 @@ form {
 }
 
 .uploaded-row {
-  margin: 10px 0;
+  min-width: 25vw;
+  margin: 25px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +28,7 @@ form {
 .upload-content {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 .processed-images {
@@ -60,11 +62,11 @@ p {
 }
 
 .subhead1 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .subhead2 {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .image-gallery {
@@ -81,6 +83,44 @@ p {
 .sample-image {
   height: 20vh;
   width: 10vw;
+}
+
+.image-processing-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.input-image-container {
+  width: 30vw;
+  height: 30vh;
+  /* border: 2px dashed #ccc; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.processed-images-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.processed-image {
+  width: 30vw;
+  height: 14vh;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: orange;
+  font-weight: bold;
 }
 
 @media (min-width: 320px) and (max-width: 450px) {
