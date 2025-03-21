@@ -4,7 +4,6 @@ import { MdDelete } from "react-icons/md";
 import { AiFillFileImage } from "react-icons/ai";
 import Button from "@mui/material/Button";
 import simpleStore from "../store/simplestore.js";
-import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
 function Uploader() {
@@ -33,52 +32,6 @@ function Uploader() {
     setHistogramImage(null);
     setFusionFrameworkImage(null);
     setSelectedImage(null);
-
-    const startTour = () => {
-      const driverObj = driver({
-        animate: true,
-        showProgress: true,
-        showButtons: ["next", "previous", "close"],
-        steps: [
-          {
-            element: ".drop-area",
-            popover: {
-              title: "Upload Image",
-              description:
-                "Click here to upload an image or drag and drop an image here.",
-              position: "left",
-            },
-          },
-          {
-            element: ".sample-image-shower",
-            popover: {
-              title: "Sample Images",
-              description: "Click here to choose a sample image.",
-              position: "left",
-            },
-          },
-          {
-            element: ".processed-images",
-            popover: {
-              title: "Processed Images",
-              description: "Click on the images to view the processed images",
-              position: "down",
-            },
-          },
-          {
-            popover: {
-              title: "That's it!",
-              description:
-                "You have completed the tour. Click on the 'X' button to close the tour.",
-            },
-          },
-        ],
-      });
-
-      driverObj.drive();
-    };
-
-    startTour();
   }, [
     setFileName,
     setFusionFrameworkImage,
