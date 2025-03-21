@@ -4,7 +4,6 @@ import { MdDelete } from "react-icons/md";
 import { AiFillFileImage } from "react-icons/ai";
 import Button from "@mui/material/Button";
 import simpleStore from "../store/simplestore.js";
-import "driver.js/dist/driver.css";
 
 function Uploader() {
   const {
