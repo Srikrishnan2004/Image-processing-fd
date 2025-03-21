@@ -133,36 +133,6 @@ function Uploader() {
       >
         Fusion Framework
       </h1>
-      <div className="processed-images">
-        <div
-          className="image"
-          onClick={() => {
-            if (!loadingHistogram && histogramImage) {
-              setSelectedImage(histogramImage);
-            }
-          }}
-        >
-          <img
-            style={{ cursor: "pointer" }}
-            src={"Frame 3.svg"}
-            alt="Histogram Equalization"
-          />
-        </div>
-        <div
-          className="image"
-          onClick={() => {
-            if (!loadingFusionFramework && fusionFrameworkImage) {
-              setSelectedImage(fusionFrameworkImage);
-            }
-          }}
-        >
-          <img
-            style={{ cursor: "pointer" }}
-            src={"Group 1.svg"}
-            alt="Fusion Framework"
-          />
-        </div>
-      </div>
       <Button
         variant="outlined"
         onClick={() => setOpen(true)}
@@ -232,6 +202,36 @@ function Uploader() {
           </span>
         </section>
       </main>
+      <div className="processed-images">
+        <div
+          className="image"
+          onClick={() => {
+            if (!loadingHistogram && histogramImage) {
+              setSelectedImage(histogramImage);
+            }
+          }}
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            src={"Frame 3.svg"}
+            alt="Histogram Equalization"
+          />
+        </div>
+        <div
+          className="image"
+          onClick={() => {
+            if (!loadingFusionFramework && fusionFrameworkImage) {
+              setSelectedImage(fusionFrameworkImage);
+            }
+          }}
+        >
+          <img
+            style={{ cursor: "pointer" }}
+            src={"Group 1.svg"}
+            alt="Fusion Framework"
+          />
+        </div>
+      </div>
     </div>
   );
 }
