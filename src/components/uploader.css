@@ -148,4 +148,50 @@ p {
     width: 40vw;
     height: 20vh;
   }
+
+  .image-processing-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #8cb2f7;
+    height: 40vh;
+    width: 80vw;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 12px 12px 12px 12px;
+    margin-top: -100px;
+  }
+
+  .processed-image {
+    margin-top: -90px;
+    width: 80vw;
+    height: 30vh;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .processed-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  #fusion {
+    margin-top: 5px;
+  }
+
+  .input-image-container {
+    width: 80vw;
+    height: 60vh;
+  }
 }

@@ -150,7 +150,7 @@ function Uploader() {
 
         {/* Right Column: Processed Images */}
         <div className="processed-images-container">
-          <div className="processed-image">
+          <div className="processed-image" id="histogram">
             {histogramImage ? (
               <img
                 width="100%"
@@ -164,7 +164,7 @@ function Uploader() {
           </div>
           <p style={{ fontSize: "12px" }}>Histogram Equalization Output</p>
 
-          <div className="processed-image">
+          <div className="processed-image" id="fusion">
             {fusionFrameworkImage ? (
               <img
                 width="100%"
