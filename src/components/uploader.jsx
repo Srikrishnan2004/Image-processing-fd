@@ -159,7 +159,7 @@ function Uploader() {
                 alt="Histogram Equalization"
               />
             ) : (
-              <p className="loading-text">Processing Histogram...</p>
+              <p></p>
             )}
           </div>
           <p style={{ fontSize: "12px" }}>Histogram Equalization Output</p>
@@ -173,7 +173,7 @@ function Uploader() {
                 alt="Fusion Framework"
               />
             ) : (
-              <p className="loading-text">Processing Fusion...</p>
+              <p></p>
             )}
           </div>
           <p style={{ fontSize: "12px" }}>Fusion Framework Output</p>
