@@ -64,6 +64,8 @@ export default function Sidebar() {
   const handleImageClick = async (image) => {
     try {
       setFileName(image.src);
+      setHistogramImage(null);
+      setFusionFrameworkImage(null);
 
       // Fetch the image data
       const response = await fetch(image.src);

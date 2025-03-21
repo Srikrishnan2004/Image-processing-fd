@@ -6,12 +6,12 @@ form {
   justify-content: center;
   align-items: center;
   border: 2px dashed #8cb2f7;
-  height: 30vh;
-  width: 30vw;
+  height: 40vh;
+  width: 40vw;
   cursor: pointer;
   border-radius: 5px;
   padding: 12px 12px 12px 12px;
-  margin-top: 10px;
+  margin-top: 90px;
 }
 
 .uploaded-row {
@@ -106,11 +106,12 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .processed-image {
-  width: 30vw;
-  height: 14vh;
+  width: 15vw;
+  height: 15vh;
   border: 1px solid #ccc;
   display: flex;
   align-items: center;

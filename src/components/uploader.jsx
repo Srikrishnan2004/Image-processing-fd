@@ -152,19 +152,31 @@ function Uploader() {
         <div className="processed-images-container">
           <div className="processed-image">
             {histogramImage ? (
-              <img src={histogramImage} alt="Histogram Equalization" />
+              <img
+                width="100%"
+                height="100%"
+                src={histogramImage}
+                alt="Histogram Equalization"
+              />
             ) : (
               <p className="loading-text">Processing Histogram...</p>
             )}
           </div>
+          <p style={{ fontSize: "12px" }}>Histogram Equalization Output</p>
 
           <div className="processed-image">
             {fusionFrameworkImage ? (
-              <img src={fusionFrameworkImage} alt="Fusion Framework" />
+              <img
+                width="100%"
+                height="100%"
+                src={fusionFrameworkImage}
+                alt="Fusion Framework"
+              />
             ) : (
               <p className="loading-text">Processing Fusion...</p>
             )}
           </div>
+          <p style={{ fontSize: "12px" }}>Fusion Framework Output</p>
         </div>
       </div>
 
