@@ -202,7 +202,7 @@ function Uploader() {
           </span>
         </section>
       </main>
-      <div className="processed-images">
+      {/* <div className="processed-images">
         <div
           className="image"
           onClick={() => {
@@ -231,7 +231,7 @@ function Uploader() {
             alt="Fusion Framework"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
